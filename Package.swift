@@ -1,38 +1,29 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 
 import PackageDescription
 
 let package = Package(
     name: "TvOSMoreButton",
+    defaultLocalization: "en",
     platforms: [
-        .tvOS(.v10)
+        .tvOS(.v12)
     ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "TvOSMoreButton",
             targets: ["TvOSMoreButton"])
     ],
     dependencies: [
-        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.8.1")
+        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.9.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "TvOSMoreButton",
-            dependencies: [
-            ],
-            path: "Source",
-            exclude: ["Artwork", "Example", "Info.plist"],
-            resources: [
-                .process("Resources")
-            ]
+            exclude: ["Info.plist"]
         ),
         .testTarget(
             name: "TvOSMoreButtonTests",
             dependencies: ["TvOSMoreButton", "SnapshotTesting"],
-            path: "Tests",
             exclude: ["Info.plist"],
             resources: [
                 .process("Public/Views/__Snapshots__/Tests_TvOSMoreButton"),
